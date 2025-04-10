@@ -1,13 +1,12 @@
-package com.project.todotasks.model;
+package com.project.todotasks;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-
 
 @Entity
 @Data
@@ -16,10 +15,9 @@ import jakarta.persistence.Id;
 public class Task {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
-    private String title;
+    private String name;
     private String description;
     private boolean completed;
 }

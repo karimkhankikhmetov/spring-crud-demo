@@ -1,45 +1,33 @@
-package com.project.todotasks.controller;
+package com.project.todotasks;
 
-import com.project.todotasks.model.Task;
-import com.project.todotasks.service.TaskService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping("/tasks")
 public class TaskController {
 
-    @Autowired
-    private TaskService taskService;
+    private final TaskRepository taskRepository;
 
-    @GetMapping
-    public List<Task> getAllTasks() {
-        return taskService.getAllTasks();
+    public TaskController(TaskRepository taskRepository) {
+        this.taskRepository = taskRepository;
     }
 
     @PostMapping
-    public Task createTask(@RequestBody Task task, UriComponentsBuilder ucb) {
-        Task task1 = task;
-        Task savedTask = TaskRepository.save();
+    public ResponseEntity<String> createTask(@RequestBody Task newTaskRequest, UriComponentsBuilder ucb) {
+        if (taskRepository.existsById(newTaskRequest.getId())) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Task with this ID already exists.");
+        }
+        Task savedTask = taskRepository.save(newTaskRequest);
         URI locationOfNewTask = ucb
-                .path("tasks/{id}")
-                .buildAndExpand(savedCashCard.id())
+                .path("/tasks/{id}")
+                .buildAndExpand(savedTask.getId())  // assuming getId() is the method in Task class
                 .toUri();
-        return ResponseEntity.created("locationOfNewTask").build();
-    }
-
-    @PutMapping("/{id}")
-    public Task updateTask(@PathVariable Long id, @RequestBody Task taskDetails) {
-        return taskService.updateTask(id, taskDetails);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteTask(@PathVariable Long id) {
-        taskService.deleteTask(id);
+        return ResponseEntity.created(locationOfNewTask).build();
     }
 }
