@@ -18,7 +18,7 @@ class TodotasksApplicationTests {
 	@Test
 	@DirtiesContext
 	void ShouldCreateTask() {
-		Task task = new Task(1L, "Homewrok", "Do the linear algebra homework", false);
+		Task task = new Task(null, "Homewrok", "Do the linear algebra homework", false);
 		ResponseEntity<Void> createResponse = restTemplate.postForEntity("/tasks", task, void.class);
 		assertThat(createResponse.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 	}

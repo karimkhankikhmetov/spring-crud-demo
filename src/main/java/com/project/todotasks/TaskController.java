@@ -19,10 +19,6 @@ public class TaskController {
 
     @PostMapping
     public ResponseEntity<String> createTask(@RequestBody Task newTaskRequest, UriComponentsBuilder ucb) {
-        if (taskRepository.existsById(newTaskRequest.getId())) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("Task with this ID already exists.");
-        }
         Task savedTask = taskRepository.save(newTaskRequest);
         URI locationOfNewTask = ucb
                 .path("/tasks/{id}")
