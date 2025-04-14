@@ -22,7 +22,7 @@ public class TaskController {
         Task savedTask = taskRepository.save(newTaskRequest);
         URI locationOfNewTask = ucb
                 .path("/tasks/{id}")
-                .buildAndExpand(savedTask.getId())  // assuming getId() is the method in Task class
+                .buildAndExpand(savedTask.getId())
                 .toUri();
         return ResponseEntity.created(locationOfNewTask).build();
     }

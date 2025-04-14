@@ -1,0 +1,29 @@
+[33mcommit a20c785a1435fbd2266a27fe3c1f707764918820[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: Karimkhan Kikhmetov <kingsleycomangoat@gmail.com>
+Date:   Thu Apr 10 07:32:49 2025 +0500
+
+    Added auto-generation of ID for Task entity
+    
+    - Changed Task entity's ID field to use @GeneratedValue for automatic ID generation by the database.
+    - This ensures that the ID is automatically generated when a new Task is saved, without requiring manual input.
+
+[33mcommit d8207949f03a9872016c7e4fe82a5f7cd18f5c25[m
+Author: Karimkhan Kikhmetov <kingsleycomangoat@gmail.com>
+Date:   Thu Apr 10 07:19:30 2025 +0500
+
+    Added POST handler for task creation and corresponding test case
+    
+    - Implemented POST handler in TaskController to handle task creation.
+    - Added test case to verify POST functionality for task creation.
+
+[33mcommit ffdd45800ccf7e687e7b9a6d41783df91fd888ff[m
+Author: Karimkhan Kikhmetov <kingsleycomangoat@gmail.com>
+Date:   Thu Apr 10 07:13:54 2025 +0500
+
+    Added Task entity, controller, repository, and tests for task functionality.
+
+[33mcommit 24c48204b334f797a85e8a69716329aa4fe5c6bb[m
+Author: Karimkhan Kikhmetov <kingsleycomangoat@gmail.com>
+Date:   Mon Apr 7 02:49:12 2025 +0500
+
+    Initial commit
